@@ -30,15 +30,17 @@ export const SCALES = [
   }
 ];
 
-export const getLabelForNote = noteIndex => {
+export const FRETS_COUNTS = [12, 18, 22, 24];
+
+export const getLabelForNote = (noteIndex: number) => {
   return NOTES[noteIndex];
 };
 
-export const filterNotesByScale = (notes, scalePattern) => {
+export const filterNotesByScale = (notes: number[], scalePattern: number[]) => {
   return notes.map(note => (scalePattern.includes(note) ? note : null));
 };
 
-export const getNotesForFrets = (startNote, fretsCount) => {
+export const getNotesForFrets = (startNote: number, fretsCount: number) => {
   const notes = [];
 
   for (let index = 0; index < fretsCount + 1; index++) {
