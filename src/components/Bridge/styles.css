@@ -19,5 +19,5 @@
 }
 
 .bridge-label.active {
-  color: #e67e22;
+  color: var(--text-color);
 }

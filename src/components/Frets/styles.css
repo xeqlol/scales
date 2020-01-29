@@ -1,6 +1,6 @@
 .fret {
   font-weight: 800;
-  color: #e67e22;
+  color: var(--text-color);
   display: flex;
   flex-direction: column;
   width: 100%;
