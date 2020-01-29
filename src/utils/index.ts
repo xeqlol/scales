@@ -1,32 +1,45 @@
 export const NOTES = [
-  "C",
-  "C#",
-  "D",
-  "D#",
-  "E",
-  "F",
-  "F#",
-  "G",
-  "G#",
-  "A",
-  "A#",
-  "B",
-  "B#"
+  "C", //   0
+  "C#", //  1
+  "D", //   2
+  "D#", //  3
+  "E", //   4
+  "F", //   5
+  "F#", //  6
+  "G", //   7
+  "G#", //  8
+  "A", //   9
+  "A#", //  10
+  "B", //   11
+  "B#" //   12
 ];
 
 export const NOTES_COUNT = NOTES.length;
 
-const C_HARMONIC_MINOR = [0, 2, 3, 5, 7, 8, 11];
-const C_MINOR = [0, 2, 3, 5, 7, 8, 10];
-
 export const SCALES = [
   {
     name: "Minor",
-    pattern: C_MINOR
+    pattern: [0, 2, 3, 5, 7, 8, 10]
   },
   {
     name: "Harmonic minor",
-    pattern: C_HARMONIC_MINOR
+    pattern: [0, 2, 3, 5, 7, 8, 11]
+  },
+  {
+    name: "Melodic minor",
+    pattern: [0, 2, 4, 6, 8, 9, 11]
+  },
+  {
+    name: "Major",
+    pattern: [0, 2, 4, 5, 7, 9, 11]
+  },
+  {
+    name: "Harmonic major",
+    pattern: [0, 2, 4, 5, 7, 8, 11]
+  },
+  {
+    name: "Melodic major",
+    pattern: [0, 2, 4, 5, 7, 8, 10]
   }
 ];
 
