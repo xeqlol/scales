@@ -4,17 +4,29 @@ import {
   NOTES_COUNT,
   SCALES,
   filterNotesByScale,
-  getNotesForFrets
+  getNotesForFrets,
+  NOTES,
+  FRETS_COUNTS
 } from "../../utils";
 
 import { Neck } from "../Neck";
-import { RootSelector } from "../RootSelector";
-import { ScaleSelector } from "../ScaleSelector";
-import { FretsCountSelector } from "../FretsCountSelector";
+import { Select } from "../Select";
 
 import "./App.css";
 
 const TUNING = [4, 11, 7, 2, 9, 4]; // TODO: make selector for tuning
+const SCALES_SELECT_ITEMS = SCALES.map(({ name }, index) => ({
+  name,
+  value: index
+}));
+const NOTES_SELECT_ITEMS = NOTES.map((note, index) => ({
+  name: note,
+  value: index
+}));
+const FRETS_SELECT_ITEMS = FRETS_COUNTS.map(fretCount => ({
+  name: fretCount,
+  value: fretCount
+}));
 
 const App = () => {
   const [scale, setScale] = useState(0);
@@ -32,12 +44,26 @@ const App = () => {
 
   return (
     <>
-      <ScaleSelector scale={scale} onChange={value => setScale(value)} />
-      <RootSelector root={root} onChange={value => setRoot(value)} />
-      <FretsCountSelector
-        fretsCount={fretsCount}
-        onChange={value => setFretsCount(value)}
-      />
+      <div className={"controls"}>
+        <Select
+          label={"Scale"}
+          items={SCALES_SELECT_ITEMS}
+          value={scale}
+          onChange={value => setScale(Number(value))}
+        />
+        <Select
+          label={"Root note"}
+          items={NOTES_SELECT_ITEMS}
+          value={root}
+          onChange={value => setRoot(Number(value))}
+        />
+        <Select
+          label={"Frets count"}
+          items={FRETS_SELECT_ITEMS}
+          value={fretsCount}
+          onChange={value => setFretsCount(Number(value))}
+        />
+      </div>
 
       <Neck strings={strings} tuning={TUNING} />
     </>
