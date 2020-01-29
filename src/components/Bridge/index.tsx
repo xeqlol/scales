@@ -15,11 +15,10 @@ export const Bridge: React.FC<{
       {tuning.map((note, index) => (
         <div className={"bridge-note"} key={index}>
           <div
-            className={
-              bridgeNotes.includes(note)
-                ? "bridge-label-active"
-                : "bridge-label"
-            }
+            className={[
+              "bridge-label",
+              bridgeNotes.includes(note) ? "active" : ""
+            ].join(" ")}
           >
             {getLabelForNote(note)}
           </div>

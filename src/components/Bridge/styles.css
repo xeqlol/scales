@@ -4,27 +4,20 @@
   color: #424242;
   display: flex;
   flex-direction: column;
-  flex: 0 0 50px;
+  flex: 0 0 28px;
   border-right: 8px solid #424242;
 }
 
 .bridge-note {
   height: 28px;
   display: flex;
-  justify-content: space-around;
-
-  position: relative;
 }
 
 .bridge-label {
-  width: 24px;
-  height: 24px;
-
   display: flex;
-  justify-content: space-around;
   align-items: center;
 }
 
-.bridge-label-active {
+.bridge-label.active {
   color: #e67e22;
 }
