@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import createPersistedState from "use-persisted-state";
 
 import {
   NOTES_COUNT,
@@ -13,6 +14,10 @@ import { Neck } from "../Neck";
 import { Select } from "../Select";
 
 import "./App.css";
+
+const useScaleState = createPersistedState("scale");
+const useRootState = createPersistedState("root");
+const useFretsCountState = createPersistedState("frets-count");
 
 const TUNING = [4, 11, 7, 2, 9, 4]; // TODO: make selector for tuning
 const SCALES_SELECT_ITEMS = SCALES.map(({ name }, index) => ({
@@ -29,9 +34,9 @@ const FRETS_SELECT_ITEMS = FRETS_COUNTS.map(fretCount => ({
 }));
 
 const App = () => {
-  const [scale, setScale] = useState(0);
-  const [root, setRoot] = useState(0);
-  const [fretsCount, setFretsCount] = useState(22);
+  const [scale, setScale] = useScaleState(0);
+  const [root, setRoot] = useRootState(0);
+  const [fretsCount, setFretsCount] = useFretsCountState(22);
 
   const { pattern } = SCALES[scale];
 
