@@ -7,7 +7,8 @@ import {
   filterNotesByScale,
   getNotesForFrets,
   NOTES,
-  FRETS_COUNTS
+  FRETS_COUNTS,
+  TUNINGS
 } from "../../utils";
 
 import { Neck } from "../Neck";
@@ -18,8 +19,8 @@ import "./App.css";
 const useScaleState = createPersistedState("scale");
 const useRootState = createPersistedState("root");
 const useFretsCountState = createPersistedState("frets-count");
+const useTuningCountState = createPersistedState("tuning");
 
-const TUNING = [4, 11, 7, 2, 9, 4]; // TODO: make selector for tuning
 const SCALES_SELECT_ITEMS = SCALES.map(({ name }, index) => ({
   name,
   value: index
@@ -32,18 +33,24 @@ const FRETS_SELECT_ITEMS = FRETS_COUNTS.map(fretCount => ({
   name: fretCount,
   value: fretCount
 }));
+const TUNINGS_SELECT_ITEMS = TUNINGS.map(({ name }, index) => ({
+  name,
+  value: index
+}));
 
 const App = () => {
   const [scale, setScale] = useScaleState(0);
   const [root, setRoot] = useRootState(0);
   const [fretsCount, setFretsCount] = useFretsCountState(22);
+  const [tuning, setTuning] = useTuningCountState(0);
 
-  const { pattern } = SCALES[scale];
+  const { pattern: scalePattern } = SCALES[scale];
+  const { pattern: tuningPatter } = TUNINGS[tuning];
 
-  const strings = TUNING.map(startNote =>
+  const strings = tuningPatter.map(startNote =>
     filterNotesByScale(
       getNotesForFrets(startNote, fretsCount),
-      pattern.map(note => (note + root) % (NOTES_COUNT - 1))
+      scalePattern.map(note => (note + root) % (NOTES_COUNT - 1))
     )
   );
 
@@ -68,9 +75,15 @@ const App = () => {
           value={fretsCount}
           onChange={value => setFretsCount(Number(value))}
         />
+        <Select
+          label={"Tuning"}
+          items={TUNINGS_SELECT_ITEMS}
+          value={tuning}
+          onChange={value => setTuning(Number(value))}
+        />
       </div>
 
-      <Neck strings={strings} tuning={TUNING} />
+      <Neck strings={strings} tuning={tuningPatter} />
     </>
   );
 };

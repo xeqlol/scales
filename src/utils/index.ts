@@ -30,6 +30,25 @@ export const SCALES = [
   }
 ];
 
+export const TUNINGS = [
+  {
+    name: "Standard E",
+    pattern: [4, 11, 7, 2, 9, 4]
+  },
+  {
+    name: "Drop D",
+    pattern: [4, 11, 7, 2, 9, 2]
+  },
+  {
+    name: "Drop C#",
+    pattern: [3, 10, 6, 1, 8, 1]
+  },
+  {
+    name: "Drop C",
+    pattern: [2, 9, 5, 0, 7, 0]
+  }
+];
+
 export const FRETS_COUNTS = [12, 18, 22, 24];
 
 export const getLabelForNote = (noteIndex: number) => {
