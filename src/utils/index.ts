@@ -44,6 +44,14 @@ export const SCALES = [
   {
     name: "Diminished",
     pattern: [0, 2, 3, 5, 6, 8, 9, 11]
+  },
+  {
+    name: "Minor arpeggio",
+    pattern: [0, 3, 7]
+  },
+  {
+    name: "Minor 7th arpeggio",
+    pattern: [0, 3, 7, 10]
   }
 ];
 
