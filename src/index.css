@@ -43,3 +43,7 @@ code {
 .sun-flower {
   --text-color: #f1c40f;
 }
+
+.white {
+  --text-color: #fff;
+}

@@ -5,7 +5,8 @@ export const THEMES = [
   "carrot",
   "alizarin",
   "amethyst",
-  "sun-flower"
+  "sun-flower",
+  "white"
 ];
 
 export const NOTES = [
