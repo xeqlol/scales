@@ -1,3 +1,13 @@
+export const THEMES = [
+  "torquoise",
+  "emerald",
+  "peter-river",
+  "carrot",
+  "alizarin",
+  "amethyst",
+  "sun-flower"
+];
+
 export const NOTES = [
   "C", //   0
   "C#", //  1

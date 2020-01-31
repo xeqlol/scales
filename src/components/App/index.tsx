@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import createPersistedState from "use-persisted-state";
 
 import {
   NOTES_COUNT,
   SCALES,
+  THEMES,
   filterNotesByScale,
   getNotesForFrets,
   NOTES,
@@ -20,6 +21,7 @@ const useScaleState = createPersistedState("scale");
 const useRootState = createPersistedState("root");
 const useFretsCountState = createPersistedState("frets-count");
 const useTuningCountState = createPersistedState("tuning");
+const useThemeState = createPersistedState("theme");
 
 const SCALES_SELECT_ITEMS = SCALES.map(({ name }, index) => ({
   name,
@@ -37,12 +39,20 @@ const TUNINGS_SELECT_ITEMS = TUNINGS.map(({ name }, index) => ({
   name,
   value: index
 }));
+const THEME_SELECT_ITEMS = [
+  ...THEMES.map((name, index) => ({
+    name,
+    value: index
+  })),
+  { name: "random", value: THEMES.length }
+];
 
 const App = () => {
   const [scale, setScale] = useScaleState(0);
   const [root, setRoot] = useRootState(0);
   const [fretsCount, setFretsCount] = useFretsCountState(22);
   const [tuning, setTuning] = useTuningCountState(0);
+  const [theme, setTheme] = useThemeState(0);
 
   const { pattern: scalePattern } = SCALES[scale];
   const { pattern: tuningPatter } = TUNINGS[tuning];
@@ -53,6 +63,13 @@ const App = () => {
       scalePattern.map(note => (note + root) % (NOTES_COUNT - 1))
     )
   );
+
+  useEffect(() => {
+    document.body.className =
+      theme === THEMES.length
+        ? THEMES[Math.floor(Math.random() * THEMES.length)]
+        : THEMES[theme];
+  });
 
   return (
     <>
@@ -80,6 +97,12 @@ const App = () => {
           items={TUNINGS_SELECT_ITEMS}
           value={tuning}
           onChange={value => setTuning(Number(value))}
+        />
+        <Select
+          label={"Color theme"}
+          items={THEME_SELECT_ITEMS}
+          value={theme}
+          onChange={value => setTheme(Number(value))}
         />
       </div>
 
