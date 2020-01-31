@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
 import createPersistedState from "use-persisted-state";
 
+import { Neck } from "../Neck";
+import { Select } from "../Select";
+import { Credentials } from "../Credentials";
+
 import {
   NOTES_COUNT,
   SCALES,
@@ -11,9 +15,6 @@ import {
   FRETS_COUNTS,
   TUNINGS
 } from "../../utils";
-
-import { Neck } from "../Neck";
-import { Select } from "../Select";
 
 import "./App.css";
 
@@ -107,6 +108,7 @@ const App = () => {
       </div>
 
       <Neck strings={strings} tuning={tuningPatter} />
+      <Credentials />
     </>
   );
 };
