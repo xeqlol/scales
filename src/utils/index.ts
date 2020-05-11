@@ -6,7 +6,7 @@ export const THEMES = [
   "alizarin",
   "amethyst",
   "sun-flower",
-  "white"
+  "white",
 ];
 
 export const NOTES = [
@@ -22,7 +22,7 @@ export const NOTES = [
   "A", //   9
   "A#", //  10
   "B", //   11
-  "B#" //   12
+  "B#", //   12
 ];
 
 export const NOTES_COUNT = NOTES.length;
@@ -30,59 +30,63 @@ export const NOTES_COUNT = NOTES.length;
 export const SCALES = [
   {
     name: "Minor",
-    pattern: [0, 2, 3, 5, 7, 8, 10]
+    pattern: [0, 2, 3, 5, 7, 8, 10],
   },
   {
     name: "Harmonic minor",
-    pattern: [0, 2, 3, 5, 7, 8, 11]
+    pattern: [0, 2, 3, 5, 7, 8, 11],
   },
   {
     name: "Melodic minor",
-    pattern: [0, 2, 4, 6, 8, 9, 11]
+    pattern: [0, 2, 4, 6, 8, 9, 11],
   },
   {
     name: "Major",
-    pattern: [0, 2, 4, 5, 7, 9, 11]
+    pattern: [0, 2, 4, 5, 7, 9, 11],
   },
   {
     name: "Harmonic major",
-    pattern: [0, 2, 4, 5, 7, 8, 11]
+    pattern: [0, 2, 4, 5, 7, 8, 11],
   },
   {
     name: "Melodic major",
-    pattern: [0, 2, 4, 5, 7, 8, 10]
+    pattern: [0, 2, 4, 5, 7, 8, 10],
   },
   {
     name: "Diminished",
-    pattern: [0, 2, 3, 5, 6, 8, 9, 11]
+    pattern: [0, 2, 3, 5, 6, 8, 9, 11],
   },
   {
     name: "Minor arpeggio",
-    pattern: [0, 3, 7]
+    pattern: [0, 3, 7],
   },
   {
     name: "Minor 7th arpeggio",
-    pattern: [0, 3, 7, 10]
-  }
+    pattern: [0, 3, 7, 10],
+  },
 ];
 
 export const TUNINGS = [
   {
     name: "Standard E",
-    pattern: [4, 11, 7, 2, 9, 4]
+    pattern: [4, 11, 7, 2, 9, 4],
   },
   {
     name: "Drop D",
-    pattern: [4, 11, 7, 2, 9, 2]
+    pattern: [4, 11, 7, 2, 9, 2],
   },
   {
     name: "Drop C#",
-    pattern: [3, 10, 6, 1, 8, 1]
+    pattern: [3, 10, 6, 1, 8, 1],
   },
   {
     name: "Drop C",
-    pattern: [2, 9, 5, 0, 7, 0]
-  }
+    pattern: [2, 9, 5, 0, 7, 0],
+  },
+  {
+    name: "Drop A",
+    pattern: [4, 11, 7, 2, 9, 4, 9],
+  },
 ];
 
 export const FRETS_COUNTS = [12, 18, 22, 24];
@@ -92,7 +96,7 @@ export const getLabelForNote = (noteIndex: number) => {
 };
 
 export const filterNotesByScale = (notes: number[], scalePattern: number[]) => {
-  return notes.map(note => (scalePattern.includes(note) ? note : null));
+  return notes.map((note) => (scalePattern.includes(note) ? note : null));
 };
 
 export const getNotesForFrets = (startNote: number, fretsCount: number) => {
