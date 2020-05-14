@@ -8,69 +8,53 @@ import { Credentials } from "../Credentials";
 import {
   NOTES_COUNT,
   SCALES,
-  THEMES,
   filterNotesByScale,
   getNotesForFrets,
   NOTES,
   FRETS_COUNTS,
-  TUNINGS
+  TUNINGS,
 } from "../../utils";
 
 import "./App.css";
+import { Notes } from "../Notes";
 
 const useScaleState = createPersistedState("scale");
 const useRootState = createPersistedState("root");
 const useFretsCountState = createPersistedState("frets-count");
 const useTuningCountState = createPersistedState("tuning");
-const useThemeState = createPersistedState("theme");
 
 const SCALES_SELECT_ITEMS = SCALES.map(({ name }, index) => ({
   name,
-  value: index
+  value: index,
 }));
 const NOTES_SELECT_ITEMS = NOTES.map((note, index) => ({
   name: note,
-  value: index
+  value: index,
 }));
-const FRETS_SELECT_ITEMS = FRETS_COUNTS.map(fretCount => ({
+const FRETS_SELECT_ITEMS = FRETS_COUNTS.map((fretCount) => ({
   name: fretCount,
-  value: fretCount
+  value: fretCount,
 }));
 const TUNINGS_SELECT_ITEMS = TUNINGS.map(({ name }, index) => ({
   name,
-  value: index
+  value: index,
 }));
-const THEME_SELECT_ITEMS = [
-  ...THEMES.map((name, index) => ({
-    name,
-    value: index
-  })),
-  { name: "random", value: THEMES.length }
-];
 
 const App = () => {
   const [scale, setScale] = useScaleState(0);
   const [root, setRoot] = useRootState(0);
   const [fretsCount, setFretsCount] = useFretsCountState(22);
   const [tuning, setTuning] = useTuningCountState(0);
-  const [theme, setTheme] = useThemeState(0);
 
   const { pattern: scalePattern } = SCALES[scale];
   const { pattern: tuningPatter } = TUNINGS[tuning];
 
-  const strings = tuningPatter.map(startNote =>
+  const strings = tuningPatter.map((startNote) =>
     filterNotesByScale(
       getNotesForFrets(startNote, fretsCount),
-      scalePattern.map(note => (note + root) % (NOTES_COUNT - 1))
+      scalePattern.map((note) => (note + root) % NOTES_COUNT)
     )
   );
-
-  useEffect(() => {
-    document.body.className =
-      theme === THEMES.length
-        ? THEMES[Math.floor(Math.random() * THEMES.length)]
-        : THEMES[theme];
-  });
 
   return (
     <>
@@ -79,35 +63,30 @@ const App = () => {
           label={"Scale"}
           items={SCALES_SELECT_ITEMS}
           value={scale}
-          onChange={value => setScale(Number(value))}
+          onChange={(value) => setScale(Number(value))}
         />
         <Select
           label={"Root note"}
           items={NOTES_SELECT_ITEMS}
           value={root}
-          onChange={value => setRoot(Number(value))}
+          onChange={(value) => setRoot(Number(value))}
         />
         <Select
           label={"Frets count"}
           items={FRETS_SELECT_ITEMS}
           value={fretsCount}
-          onChange={value => setFretsCount(Number(value))}
+          onChange={(value) => setFretsCount(Number(value))}
         />
         <Select
           label={"Tuning"}
           items={TUNINGS_SELECT_ITEMS}
           value={tuning}
-          onChange={value => setTuning(Number(value))}
-        />
-        <Select
-          label={"Color theme"}
-          items={THEME_SELECT_ITEMS}
-          value={theme}
-          onChange={value => setTheme(Number(value))}
+          onChange={(value) => setTuning(Number(value))}
         />
       </div>
 
       <Neck strings={strings} tuning={tuningPatter} />
+      <Notes scale={SCALES[scale].pattern} root={root} />
       <Credentials />
     </>
   );

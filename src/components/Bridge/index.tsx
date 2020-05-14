@@ -1,6 +1,6 @@
 import React from "react";
 
-import { getLabelForNote } from "../../utils";
+import { getLabelForNote, NOTES_COLORS } from "../../utils";
 
 import "./styles.css";
 
@@ -12,18 +12,20 @@ export const Bridge: React.FC<{
 
   return (
     <div className={"bridge"}>
-      {tuning.map((note, index) => (
-        <div className={"bridge-note"} key={index}>
-          <div
-            className={[
-              "bridge-label",
-              bridgeNotes.includes(note) ? "active" : ""
-            ].join(" ")}
-          >
-            {getLabelForNote(note)}
+      {tuning.map((note, index) => {
+        const isActive = bridgeNotes.includes(note);
+
+        return (
+          <div className={"bridge-note"} key={index}>
+            <div
+              style={isActive ? { color: NOTES_COLORS[note] } : {}}
+              className={["bridge-label", isActive ? "active" : ""].join(" ")}
+            >
+              {getLabelForNote(note)}
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 };

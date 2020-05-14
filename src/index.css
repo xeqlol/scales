@@ -13,37 +13,5 @@ code {
 }
 
 :root {
-  --text-color: #fff;
-}
-
-.torquoise {
-  --text-color: #1abc9c;
-}
-
-.emerald {
-  --text-color: #2ecc71;
-}
-
-.peter-river {
-  --text-color: #3498db;
-}
-
-.carrot {
-  --text-color: #e67e22;
-}
-
-.alizarin {
-  --text-color: #e74c3c;
-}
-
-.amethyst {
-  --text-color: #9b59b6;
-}
-
-.sun-flower {
-  --text-color: #f1c40f;
-}
-
-.white {
-  --text-color: #fff;
+  --text-color: #888;
 }

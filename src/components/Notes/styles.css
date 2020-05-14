@@ -1,0 +1,22 @@
+.notes {
+  display: flex;
+  margin-top: 10px;
+  color: #444;
+}
+
+.notes-note {
+  margin-right: 10px;
+  width: 24px;
+  height: 24px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.notes-title {
+  color: var(--text-color);
+}
+
+.notes-container {
+  margin-left: 30px;
+  margin-top: 30px;
+}

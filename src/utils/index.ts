@@ -1,12 +1,16 @@
-export const THEMES = [
-  "torquoise",
-  "emerald",
-  "peter-river",
-  "carrot",
-  "alizarin",
-  "amethyst",
-  "sun-flower",
-  "white",
+export const NOTES_COLORS = [
+  "#e74c3c", // C
+  "#c0392b", // C#
+  "#e67e22", // D
+  "#d35400", // D#
+  "#fecd04", // E
+  "#2fcc71", // F
+  "#3498db", // F#
+  "#2980b9", // G
+  "#745ec5", // G#
+  "#95a5a6", // A
+  "#ef717a", // A#
+  "#d45c9e", // B
 ];
 
 export const NOTES = [
@@ -22,7 +26,6 @@ export const NOTES = [
   "A", //   9
   "A#", //  10
   "B", //   11
-  "B#", //   12
 ];
 
 export const NOTES_COUNT = NOTES.length;
@@ -103,7 +106,7 @@ export const getNotesForFrets = (startNote: number, fretsCount: number) => {
   const notes = [];
 
   for (let index = 0; index < fretsCount + 1; index++) {
-    notes.push((index + startNote) % (NOTES_COUNT - 1));
+    notes.push((index + startNote) % NOTES_COUNT);
   }
 
   return notes;

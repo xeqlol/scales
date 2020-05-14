@@ -1,11 +1,11 @@
 import React from "react";
 
-import { getLabelForNote } from "../../utils";
+import { getLabelForNote, NOTES_COLORS } from "../../utils";
 
 import "./styles.css";
 
 export const Frets: React.FC<{ strings: (number | null)[][] }> = ({
-  strings
+  strings,
 }) => (
   <>
     {strings[0].slice(1).map((_, fretIndex) => (
@@ -18,7 +18,12 @@ export const Frets: React.FC<{ strings: (number | null)[][] }> = ({
             return (
               <div className={"note"} key={stringIndex}>
                 {note !== null ? (
-                  <div className={"label"}>{getLabelForNote(note)}</div>
+                  <div
+                    className={"label"}
+                    style={{ color: NOTES_COLORS[note] }}
+                  >
+                    {getLabelForNote(note)}
+                  </div>
                 ) : null}
               </div>
             );
