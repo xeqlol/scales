@@ -29,6 +29,7 @@ export const Frets: React.FC<{ strings: (number | null)[][] }> = ({
             );
           })}
         </div>
+        <div className={"fret-index"}>{fretIndex + 1}</div>
       </div>
     ))}
   </>

@@ -32,40 +32,44 @@ export const NOTES_COUNT = NOTES.length;
 
 export const SCALES = [
   {
+    name: "Lydian dominant",
+    pattern: [2, 2, 2, 1, 2, 1, 2],
+  },
+  {
     name: "Minor",
-    pattern: [0, 2, 3, 5, 7, 8, 10],
+    pattern: [2, 1, 2, 2, 1, 2, 2],
   },
   {
     name: "Harmonic minor",
-    pattern: [0, 2, 3, 5, 7, 8, 11],
+    pattern: [2, 1, 2, 2, 1, 3, 1],
   },
   {
     name: "Melodic minor",
-    pattern: [0, 2, 4, 6, 8, 9, 11],
+    pattern: [2, 2, 2, 2, 1, 2, 1],
   },
   {
     name: "Major",
-    pattern: [0, 2, 4, 5, 7, 9, 11],
+    pattern: [2, 2, 1, 2, 2, 2, 1],
   },
   {
     name: "Harmonic major",
-    pattern: [0, 2, 4, 5, 7, 8, 11],
+    pattern: [2, 2, 1, 2, 1, 3, 1],
   },
   {
     name: "Melodic major",
-    pattern: [0, 2, 4, 5, 7, 8, 10],
+    pattern: [2, 2, 1, 2, 1, 2, 2],
   },
   {
     name: "Diminished",
-    pattern: [0, 2, 3, 5, 6, 8, 9, 11],
+    pattern: [2, 1, 2, 1, 2, 1, 2, 1],
   },
   {
     name: "Minor arpeggio",
-    pattern: [0, 3, 7],
+    pattern: [3, 4, 8],
   },
   {
     name: "Minor 7th arpeggio",
-    pattern: [0, 3, 7, 10],
+    pattern: [3, 4, 3, 2],
   },
 ];
 
@@ -73,6 +77,10 @@ export const TUNINGS = [
   {
     name: "Standard E",
     pattern: [4, 11, 7, 2, 9, 4],
+  },
+  {
+    name: "Standard C",
+    pattern: [0, 7, 3, 10, 5, 0],
   },
   {
     name: "Drop D",
@@ -94,12 +102,43 @@ export const TUNINGS = [
 
 export const FRETS_COUNTS = [12, 18, 22, 24];
 
+export const MODES = [
+  {
+    name: "Ionian",
+    shift: 0,
+  },
+  {
+    name: "Dorian",
+    shift: 1,
+  },
+  {
+    name: "Phrygian",
+    shift: 2,
+  },
+  {
+    name: "Lydian",
+    shift: 3,
+  },
+  {
+    name: "Mixolydian",
+    shift: 4,
+  },
+  {
+    name: "Aeolian",
+    shift: 5,
+  },
+  {
+    name: "Locrian",
+    shift: 6,
+  },
+];
+
 export const getLabelForNote = (noteIndex: number) => {
   return NOTES[noteIndex];
 };
 
-export const filterNotesByScale = (notes: number[], scalePattern: number[]) => {
-  return notes.map((note) => (scalePattern.includes(note) ? note : null));
+export const filterNotesByScale = (notes: number[], scaleNotes: number[]) => {
+  return notes.map((note) => (scaleNotes.includes(note) ? note : null));
 };
 
 export const getNotesForFrets = (startNote: number, fretsCount: number) => {
@@ -110,4 +149,30 @@ export const getNotesForFrets = (startNote: number, fretsCount: number) => {
   }
 
   return notes;
+};
+
+export const getNotesForScale = (root: number, scale: number[]) => {
+  const notes = [root];
+
+  for (let index = 0; index < scale.length; index++) {
+    const nextNote = (notes[notes.length - 1] + scale[index]) % NOTES_COUNT;
+
+    notes.push(nextNote);
+  }
+
+  return notes;
+};
+
+const rotateArray = <T extends any[]>(array: T, shift: number) => {
+  const newArray = [...array];
+
+  shift -= newArray.length * Math.floor(shift / newArray.length);
+  newArray.push.apply(newArray, newArray.splice(0, shift));
+
+  return newArray;
+};
+
+export const applyModeToScale = (mode: number, scale: number[]) => {
+  console.log(scale, mode, rotateArray(scale, mode));
+  return rotateArray(scale, mode);
 };
